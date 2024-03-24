@@ -1,0 +1,15 @@
+<%- include('shared/htmlstart') -%>
+
+<% if(typeof errors !== 'undefined') {%>
+    <h2>Errors</h2>
+    <%
+    for(let error of errors){
+        %>
+        <p><%= error.msg %></p>
+        <%
+    }
+} %>
+
+<a href="/signup">Go Back</a>
+
+<%- include('shared/htmlend') -%>

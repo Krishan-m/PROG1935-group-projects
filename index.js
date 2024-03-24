@@ -1,3 +1,10 @@
+// Group members:
+// - Dharma Witt
+// - Esteban 
+// - Krishan Singh
+// - Sameer
+// - Sahil
+
 // imports
 const express = require('express');
 const {check, validationResult} = require('express-validator');
@@ -12,6 +19,7 @@ mongoose.connect("mongodb://localhost:27017/EducationTemp")
 // MongoDB model
 const signupDetail = mongoose.model("signupInfo", {
     username: String,
+    email: String,
     password: String
 });
 
@@ -25,37 +33,40 @@ app.get('/', function(req, res){
 });
 
 app.get('/courses', function(req, res){
-    res.send('courses');
+    res.render('courses');
 });
 
 app.get('/blog', function(req, res){
-    res.send('blog');
+    res.render('blog');
 });
 
 app.get('/shop', function(req, res){
-    res.send('shop');
+    res.render('shop');
 });
 
 app.get('/signup', function(req, res){
-    res.send('shop');
+    res.render('signup');
 });
 
 // Taking values from form - Esteban
 app.post("/signupForm",[
     check("username", "Username is required").notEmpty(),
-    check("userpassword", "Password is not strong").isLength({min: 6}),
-    check("userpasswordconfirm", "Password is not same").custom(value=>{
+    check("email", "Email is invalid!").isEmail(),
+    check("password", "Password is not strong").isLength({min: 6}),
+    check("userpasswordconfirm", "Password is not same").custom((value, {req})=>{
         return value === req.body.userpassword;
     })
 ],  function(req, res){
     const errors = validationResult(req);
     if (errors.isEmpty()){
         let username = req.body.username;
-        let userpassword = req.body.userpassword;
+        let email = req.body.email;
+        let password = req.body.password;
 
         let dbObj = {
             username: username,
-            useremail: userpassword,
+            email: email,
+            password: password,
         }
 
         let mongoooseDbObj = new signupDetail(dbObj); // creates the instance of the mongodb model defined above
@@ -64,10 +75,11 @@ app.post("/signupForm",[
         });
     }
     else {
-        // res.render("contact", {errors: errors.array()})
+        res.render("error", {errors: errors.array()})
+        console.log(errors);
     }
-    console.log(errors);
 })
 
-app.listen('4200');
-console.log("Port listening at 4200");
+let port = 4200;
+app.listen(`${port}`);
+console.log(`Listening at http://localhost:${port}/`);
