@@ -19,3 +19,11 @@ This is a workspace for group project development
 - To commit changes, use "git commit -m "message text""
 - Use "git push -u origin main" to push changes to github.
 - Done!
+
+## TODO
+- Add content in ejs files
+- Add style sheets in public folder
+
+## Completed tasks
+- Routing
+- MongoDB connection
