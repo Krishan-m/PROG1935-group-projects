@@ -1,62 +1,177 @@
-*{
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui;
+    color: white;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #000;
-    color: #fff;
+    background-image: url("bg-img.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
+
+/* navbar */
 nav {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    padding: 0px 30px;
 }
+
 nav ul {
-    list-style-type: none;
-    padding: 0;
+    display: flex;
+    list-style: none;
 }
+
 nav ul li {
-    display: inline;
-    margin: 0 10px;
+    margin: 0px 15px;
 }
+
 nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-main {
-    padding: 50px;
-    text-align: center;
-}
-main h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
-}
-main p {
-    margin-bottom: 30px;
-}
-main button {
-    background-color: #008CBA;
-    border: none;
     color: white;
-    padding: 15px 32px;
-    text-align: center;
     text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    display: block;
+    transition-duration: 0.2s;
+}
+
+nav ul li a:hover {
+    transform: scale(1.1);
+}
+
+/* Main Page */
+main {
+    text-align: center;
+}
+
+#joinButtons {
+    display: flex;
+    margin: 30px;
+    justify-content: center;
+}
+
+/* Courses */
+#courseList {
+    border: 2px solid white;
+    background-color: #b9b9b9b0;
+    width: 25%;
+    margin: 20px auto;
+    list-style: none;
+    border-radius: 17px;
+}
+
+#courseList li {
+    margin: 12px;
+    transition-duration: 0.2s;
     cursor: pointer;
 }
-footer {
-    background-color: #333;
-    color: #fff;
+
+#courseList li:hover {
+    transform: scale(1.05);
+}
+
+/* Shop */
+#shop .sassy-btn{
+    margin: 20px auto;
+}
+
+/* Sign up */
+#signup{
+    display: flex;
+    justify-content: center;
+}
+
+#signup input{
+    background-color: transparent;
+    padding: 7px 12px;
+    border: 2px solid white; 
+    margin: 12px 0px;
+    color: black;
+}
+
+#signup input::placeholder{
+    color: #000;
+}
+
+/* Error */
+.errors-container{
     text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+}
+
+.error-message{
+    margin: 0px 7px;
+    font-style: italic;
+    text-align: center;
+}
+
+footer {
+    position: absolute;
+    width: 100vw;
+    text-align: center;
+    bottom: 0px;
+    left: 0px;
+}
+
+/* Common classes */
+p::selection,
+span::selection,
+h1::selection,
+h2::selection,
+h3::selection {
+    background-color: black;
+    color: white;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+h2 {
+    font-size: 27px;
+}
+
+h3 {
+    font-size: 23px;
+}
+
+/* Utility Classes */
+.sassy-btn {
+    display: block;
+    border: 1px solid white;
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+    padding: 7px 12px;
+    transition-duration: 0.2s;
+    margin: 20px 15px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.sassy-btn:hover{
+    background-color: white !important;
+    color: black !important;
+    transform: scale(1.05);
+}
+
+.wavy-btn {
+    display: block;
+    border: 2px solid white;
+    background-color: white;
+    color: black;
+    border-radius: 0 15px 0 15px;
+    text-decoration: none;
+    padding: 5px 12px;
+    transition-duration: 0.2s;
+    margin: 20px 15px;
+    width: fit-content;
+}
+
+.wavy-btn:hover {
+    transform: scale(1.1);
+    background-color: transparent;
 }

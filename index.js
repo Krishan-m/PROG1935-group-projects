@@ -3,14 +3,15 @@
 // - Esteban 
 // - Krishan Singh
 // - Sameer
-// - Sahil
-//- Ryjo Kollely Mathew
+// - Sahil Mansibhai
+// - Ryjo Kollely Mathew
 
 // imports
 const express = require('express');
 const {check, validationResult} = require('express-validator');
 const path = require('path');
 const mongoose = require('mongoose');
+const { log } = require('console');
 
 const app = express();
 
@@ -21,7 +22,8 @@ mongoose.connect("mongodb://localhost:27017/EducationTemp")
 const signupDetail = mongoose.model("signupInfo", {
     username: String,
     email: String,
-    password: String
+    password: String,
+    confirmPassword: String
 });
 
 app.set("views", path.join(__dirname, "views"));
@@ -54,25 +56,22 @@ app.post("/signupForm",[
     check("username", "Username is required").notEmpty(),
     check("email", "Email is invalid!").isEmail(),
     check("password", "Password is not strong").isLength({min: 6}),
-    check("userpasswordconfirm", "Password is not same").custom((value, {req})=>{
-        return value === req.body.userpassword;
+    check("confirmPassword", "Confirmed password is not same").custom((value, {req})=>{
+        return value === req.body.password;
     })
 ],  function(req, res){
     const errors = validationResult(req);
     if (errors.isEmpty()){
-        let username = req.body.username;
-        let email = req.body.email;
-        let password = req.body.password;
-
-        let dbObj = {
-            username: username,
-            email: email,
-            password: password,
-        }
-
-        let mongoooseDbObj = new signupDetail(dbObj); // creates the instance of the mongodb model defined above
+        console.log(req.body);
+        let mongoooseDbObj = new signupDetail({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            confirmPassword: req.body.confirmPassword
+        }); // creates the instance of the mongodb model defined above
         mongoooseDbObj.save().then(()=>{
             console.log("Signup information saved!");
+            res.render('thanks');
         });
     }
     else {

@@ -1,15 +1,15 @@
 <%- include('shared/htmlstart') -%>
 
-<% if(typeof errors !== 'undefined') {%>
-    <h2>Errors</h2>
-    <%
-    for(let error of errors){
-        %>
-        <p><%= error.msg %></p>
-        <%
-    }
-} %>
+<% if (typeof errors !=='undefined' ) {%>
+    <h2 class="center">ERROR!</h2>
+    <div class="errors-container">
+        <% for (let error of errors) {%>
+            <p class="error-msg">
+                <%= error.msg %>
+            </p>
+    </div>
+<% }} %>
 
-<a href="/signup">Go Back</a>
+<a href="/signup" class="sassy-btn">Go Back</a>
 
 <%- include('shared/htmlend') -%>
